@@ -2,6 +2,8 @@
 
 An accessibility infographic for readable **BART and NYC MTA subway announcements**: hearing access, noisy trains, clear language, and greater independence.
 
+Live: [Homepage](https://joshiujjwal.github.io/caption-transit/) · [NYC](https://joshiujjwal.github.io/caption-transit/nyc/) · [SF / BART](https://joshiujjwal.github.io/caption-transit/sf/)
+
 A dependency-free static site: a homepage, `/nyc/`, and `/sf/`, sharing `styles.css`. Each city page has concise sourced context and its own Change.org petition. SF covers BART, not Muni. No backend, JavaScript, analytics, signature collection, or live transit integration. Not affiliated with or endorsed by either operator.
 
 The page fits standard desktop and phone viewports without scrolling. Very short windows or enlarged text can scroll naturally rather than clip content. Technical research and outreach guidance live here, not on the infographic.
@@ -30,7 +32,7 @@ Before publishing, also check mobile/desktop layouts, keyboard-only navigation a
 
 Infographic validation: structural checks and 13 regression tests pass. Chromium confirmed all three pages fit without scrolling at 1280x720, 768x1024, 375x667, and 320x568, with correct city petitions, no-JavaScript navigation, project-path hosting, and automated axe WCAG A/AA checks. Earlier homepage checks also covered 1440x900, 1024x768, 390x844, keyboard focus, print rendering, and narrow/zoom-equivalent reflow. Both public petitions were verified in the browser before linking. Short-screen layouts allow overflow instead of hiding content. Browser helpers were installed only in the session workspace, not as project dependencies. The manual publishing workflow's YAML and city-page staging were validated.
 
-Limitations: no manual screen-reader testing, actual browser-menu zoom testing, cross-browser verification, or deployed-site check was performed. Initial automated source checks returned HTTP 403 for agency URLs; the agency content was researched separately, with the R211 excerpt-only limitation noted below. The public petitions were readable, but a later JavaScript-enabled automated visit hit Change.org's session API HTTP 403 and displayed a server error. Verify signing in a normal logged-in browser before deployment. Automated accessibility checks are not certification.
+Limitations: no manual screen-reader testing, actual browser-menu zoom testing, or cross-browser verification was performed. Initial automated source checks returned HTTP 403 for agency URLs; the agency content was researched separately, with the R211 excerpt-only limitation noted below. The public petitions were readable, but a later JavaScript-enabled automated visit hit Change.org's session API HTTP 403 and displayed a server error. Verify signing in a normal logged-in browser before sharing. Automated accessibility checks are not certification.
 
 ## Content and source maintenance
 
@@ -75,16 +77,15 @@ Do not add an on-site signature form, tracker, payment collection, or automatic 
 
 ## Publishing on GitHub Pages
 
-No deployment has been triggered. `.github/workflows/pages.yml` only runs through **manual dispatch**, and requires its publication-approval checkbox. It stages only `index.html`, `styles.css`, `nyc/index.html`, and `sf/index.html`, not tests, scripts, or repository documentation.
+The site is published on GitHub Pages with owner approval. `.github/workflows/pages.yml` only runs through **manual dispatch**, and requires its publication-approval checkbox. It stages only `index.html`, `styles.css`, `nyc/index.html`, and `sf/index.html`, not tests, scripts, or repository documentation.
 
-Owner launch prerequisites:
+For future updates:
 
 1. Review campaign identity, claims, all cited sources (including access-blocked pages), outreach drafts, and recipient choices. Resolve validation limitations.
 2. Verify both regional signing links and recipient choices.
-3. Make the intended repository public if needed, or confirm your plan supports Pages for its visibility. Confirm the intended default branch.
-4. Commit/push the reviewed site and workflow. In repository **Settings > Pages**, select **GitHub Actions** as the publishing source. Configure the `github-pages` environment with reviewer protection if available.
-5. In **Actions**, select **Publish static site (manual)**, choose the reviewed branch, check the approval input, and run it. Verify the deployed page and links at the URL shown by the deploy job.
+3. Commit/push the reviewed changes to `main`. Repository **Settings > Pages** already uses **GitHub Actions**.
+4. In **Actions**, select **Publish static site (manual)**, choose `main`, check the approval input, and run it. Verify the deployed pages and links at the URL shown by the deploy job.
 
-Repository Pages settings could not be inspected during implementation because the local GitHub CLI authentication was invalid. The workflow is prepared, but account eligibility, repository settings, and deployment remain owner actions. Local preview does not need GitHub authentication.
+The public repository uses Actions-based Pages. After deployment, the live homepage, both city routes, and shared stylesheet were verified against the committed files. Local preview does not need GitHub authentication.
 
-No operator has confirmed a pilot and no sponsor has been approached. The owner published the petitions; this assistant has not signed them, sent outreach, or deployed the website.
+No operator has confirmed a pilot and no sponsor has been approached. The owner published the petitions; this assistant has not signed them or sent outreach.
