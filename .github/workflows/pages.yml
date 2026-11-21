@@ -1,0 +1,50 @@
+name: Publish static site (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      approve_publication:
+        description: "I reviewed the content, sources, petition state, and approve public publication"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: ${{ inputs.approve_publication }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate site
+        run: |
+          python3 scripts/check_site.py
+          python3 -m unittest discover -s tests
+      - name: Stage public files only
+        run: |
+          mkdir -p _site/nyc _site/sf
+          cp index.html styles.css _site/
+          cp nyc/index.html _site/nyc/
+          cp sf/index.html _site/sf/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
